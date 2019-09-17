@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/olekukonko/tablewriter"
+	"../tablewriter"
 )
 
 type Plugin struct {

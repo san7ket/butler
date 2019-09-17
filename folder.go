@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"crypto/tls"
 )
 
 type JenkinsFolder struct {
@@ -71,8 +72,10 @@ func (folder *JenkinsFolder) GetCredentials() Credentials {
 
 func GetFolder(url string, folderName string, username string, password string) (JenkinsFolder, error) {
 	url = fmt.Sprintf("%s/config.xml", GetFolderURL(url, folderName))
-
-	client := &http.Client{}
+    tr := &http.Transport{
+    TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+    }
+	client := &http.Client{Transport: tr}
 	req, err := http.NewRequest("GET", url, nil)
 	req.SetBasicAuth(username, password)
 	if err != nil {

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/urfave/cli"
+	"../cli"
 )
 
 func main() {
